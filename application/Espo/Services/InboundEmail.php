@@ -490,6 +490,8 @@ class InboundEmail extends \Espo\Services\Record
                 if (!$email->isFetched()) {
                     $this->getServiceFactory()->create('Stream')->noteEmailReceived($case, $email);
                 }
+                $case->set('status', 'New');
+                $this->getEntityManager()->saveEntity($case);
             }
             return;
         }
